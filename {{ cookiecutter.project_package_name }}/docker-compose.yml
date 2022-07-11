@@ -7,7 +7,7 @@ services:
     ports:
       - "{{ cookiecutter.api_port }}:{{ cookiecutter.api_port }}"
     volumes:
-      - ./{{ cookiecutter.project_package_name }}/{{ cookiecutter.project_package_name }}/alembic/versions:/code/alembic/versions
+      - ./{{ cookiecutter.project_package_name }}/{{ cookiecutter.project_package_name }}:/code
   database:
     image: postgres
     expose:
