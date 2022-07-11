@@ -37,7 +37,7 @@ This template uses [pre-commit](https://pre-commit.com/) to run GIT hooks in you
  * [Isort](https://pycqa.github.io/isort/)
  * [Flake8](https://flake8.pycqa.org/en/latest/)
 
-This helps developers to keep the same code styling in the project.
+This helps developers to keep the same code style in the project.
 
 To install the hooks in your repo, first [install pre-commit](https://pre-commit.com/#install) in your system. Then run:
 ```shell
@@ -188,7 +188,7 @@ make run_unit_tests
 
 ## Build your API
 
-Say we want to add a few endpoints to manage a TODO list, which we'll store in a table in our database.
+Let's see with an example how you could build an API to manage a TODO list.
 
 
 #### Adding database models
@@ -217,8 +217,8 @@ class Todo(Base):
 
 #### Adding database migrations
 
-Now is time to generate the database migrations from the model we've just added. With the services running, do the 
-following:
+Now is time to generate the database migrations from the model we've just added. With the 
+[services running](#docker-compose), do the following:
 
 ```shell
 cd {project_package_name}
@@ -232,8 +232,8 @@ named *{migration_id}_add_todo_table.py*. That's the Alembic migration to create
 
 #### Applying migrations to the database
 
-Simply run the following to upgrade the database to it's latest version. In our case, it runs the migration we've just 
-generated to create the "todo" table:
+Use this command to upgrade the database to the latest version. In our case, it will run the migration we've just 
+generated:
 ```shell
 cd {project_package_name}
 make migrate_database
@@ -277,7 +277,7 @@ class TodoPaginatedList(BasePaginatedList):
 It's probably convenient to make our URI paths configurable in our API. You could just hardcode them, but say we want 
 to be able to change them in our settings file 
 ([settings.env](/%7B%7B%20cookiecutter.project_package_name%20%7D%7D/%7B%7B%20cookiecutter.project_package_name%20%7D%7D/%7B%7B%20cookiecutter.project_package_name%20%7D%7D/settings.env)), 
-with absolutely no impact in our code. Then on 
+with absolutely no impact in our code. On 
 ([settings.py](/%7B%7B%20cookiecutter.project_package_name%20%7D%7D/%7B%7B%20cookiecutter.project_package_name%20%7D%7D/%7B%7B%20cookiecutter.project_package_name%20%7D%7D/settings.py)) 
 we'll add two new settings. One for the URI path (_todos_route_), and another to give the route a human-readable name for the API documentation 
 (_todos_tag_). These are default values, meaning that if you change them in _settings.env_, the values in that file will be used instead.
@@ -293,7 +293,7 @@ class Settings(BaseSettings):
     ...
 ```
 
-Then we'll add a new _todos.py_ module in 
+Then add a new _todos.py_ module in 
 [routers](/%7B%7B%20cookiecutter.project_package_name%20%7D%7D/%7B%7B%20cookiecutter.project_package_name%20%7D%7D/%7B%7B%20cookiecutter.project_package_name%20%7D%7D/routers), 
 and add our new router with configurable path and tag:
 
@@ -305,7 +305,7 @@ from settings import settings
 router = APIRouter(prefix=settings.todos_route, tags=[settings.todos_tag])
 ```
 
-And then all that's left is register our router in the API, which is done by adding it to a list in 
+All that's left now is to register our router in the API, which is done by adding it to a list in 
 [routers/\_\_init\_\_.py](/%7B%7B%20cookiecutter.project_package_name%20%7D%7D/%7B%7B%20cookiecutter.project_package_name%20%7D%7D/%7B%7B%20cookiecutter.project_package_name%20%7D%7D/routers/__init__.py):
 
 ```python
@@ -320,8 +320,6 @@ ALL_ROUTERS: List[APIRouter] = [todos_router]
 
 
 #### Adding endpoints
-
-Before adding endpoints, you'll need to [add a new router](#add-a-new-router) first.
 
 Let's add a few endpoints to the router, in _routers/todos.py_.
 
