@@ -7,17 +7,19 @@ To create your new project from this template, simply run:
 
 ```shell
 pip install create_app
-python -m create_app python_fastapi_with_database
+python -m create_app create python_fastapi_with_database
 ```
 
 
 ## What's in this template
 
  * Project structure
- * A [FastAPI](https://fastapi.tiangolo.com/) API:
-   * Configurable through environment variables and environment file
-   * With CORS
-   * And Base models for endpoints with pagination
+ * A [FastAPI](https://fastapi.tiangolo.com/) API with:
+   * Configuration through environment variables and environment file
+   * CORS
+   * Alembic database migrations
+   * Methods to manage database sessions and very common queries
+   * Models and methods for endpoints with pagination 
  * Virtualenv
  * Unit tests
  * Docker Compose containerization
